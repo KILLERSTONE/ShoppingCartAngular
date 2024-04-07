@@ -1,0 +1,13 @@
+<div class="books-container">
+  <h2>Programming Book Shopping</h2>
+  <button class="book-toggle-button" (click)="toggleBooks()">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQesEmX4No442JnYACY0GHeMOlPjnj0SCsymbtK4Ho2lQ&s" width="50px">
+  </button>
+
+  <ul *ngIf="isVisible">
+    <ng-container *ngFor="let singlebook of books; let i=index;">
+      <app-book [book]="singlebook"></app-book>
+    </ng-container>
+  </ul>
+
+</div>

@@ -1,0 +1,14 @@
+<li style="display: flex; justify-content: space-between;">
+  <img [src]="book.src" [alt]="book.name" width="100px">
+  <div style="text-align: center;">
+    <strong style="font-size: 18px">{{book.name| titlecase}}</strong> <br>By<br> <strong style="font-size: 15px">{{book.author|titlecase}}</strong>
+    <p>{{book.amount|currency:'INR'}}</p>
+    <p>{{quantity}}</p>
+
+  </div>
+
+  <div>
+    <button (click)="addToCart()">Add</button>
+    <button (click)="removeFromCart()" *ngIf="quantity>0">Remove</button>
+  </div>
+</li>

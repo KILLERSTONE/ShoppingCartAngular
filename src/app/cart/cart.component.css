@@ -1,0 +1,64 @@
+.cart-container {
+  border: 1px solid #000000;
+  padding: 40px;
+  border-radius: 20px;
+  margin-top: 20px;
+  position: relative;
+}
+
+.cart-toggle-button {
+  position: absolute;
+  top:10px;
+  left:50px;
+
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.cart-table th,
+.cart-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+.visible-cart-class h1 {
+  text-align: center;
+}
+.cart-table th.left-align {
+  text-align: center;
+}
+
+.total-label {
+  text-align: right;
+}
+
+.total-value {
+  font-weight: bold;
+}
+
+.book-image {
+  margin-left: 20px;
+  float: left;
+}
+
+.book-details {
+  display: flex;
+  align-items: center;
+}
+
+.book-details h2 {
+  margin: 0;
+  text-align: left;
+}
+
+.book-details h5 {
+  margin: 0 10px;
+}
+
+.book-details h4 {
+  margin: 0;
+  text-align: left;
+}
