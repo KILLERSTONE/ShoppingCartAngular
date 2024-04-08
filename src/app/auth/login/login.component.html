@@ -1,0 +1,26 @@
+<div class="flex justify-center">
+
+
+  <form #mgForm="ngForm" (ngSubmit)="submit()" class="p-4 mt-20 rounded-lg border" >
+    <h1 class="text-center text-xl">Login</h1>
+    <div class="my-5 w-full">
+      <label for="email">Email</label>
+      <input type="email"  [(ngModel)]="form.email" #email="ngModel" name="email" placeholder="Email Address" id="email" class="p-2 rounder w-full border text-sm">
+    </div>
+    <div class="my-5 w-full">
+      <label for="password">Password</label>
+      <input type="password" [(ngModel)] ="form.password" #password="ngModel" name="password" placeholder="Enter Password" class="p-2 rounder w-full border text-sm">
+    </div>
+    <div class="my-5 w-full">
+      <button type="submit" [disabled]="mgForm.form.invalid" class="p-2 w-full bg-purple-700 text-white hover:bg-purple-900 rounded">
+
+        <ng-container *ngIf="isLoading()">
+          Loading...
+        </ng-container>
+        <ng-container *ngIf="!isLoading()">
+          Submit
+        </ng-container>
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { initializeApp } from 'firebase/app';
+import { firebaseConfig } from '../../firebase.config';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +10,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'day1-app';
+
+  ngOnInit(){
+    //initialize firebase
+    initializeApp(firebaseConfig);
+
+  }
+
 }

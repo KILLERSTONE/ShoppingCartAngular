@@ -1,8 +1,20 @@
 <nav class="navbar">
-  <div class="logo">My app</div>
-  <ul class="nav-links">
-    <li><a routerLink="/">Home</a></li>
-    <li><a routerLink="/cart">Cart</a></li>
-  </ul>
-</nav>
+  <div class="flex justify-between p-4 bg-purple-900 text-white">
+    <div class="logo">
+      <h1 >Book Shop</h1>
+    </div>
+    <ul class="nav-links">
+      <a routerLink="/" class="mx-4">Home</a>
+      <a routerLink="/cart" class="mx-4">Cart</a>
+      <ng-container *ngIf="!isAuthenticated()">
+      <a routerLink="/login" class="mx-4">Login</a>
+      <a routerLink="/register" class="mx-4">Register</a>
+    </ng-container>
 
+    <ng-container *ngIf="isAuthenticated()">
+      <a routerLink="/login" (click)="logOut()" class="mx-4">Logout</a>
+      <a routerLink="/register" class="mx-4">Register</a>
+    </ng-container>
+    </ul>
+  </div>
+</nav>

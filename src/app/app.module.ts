@@ -11,6 +11,7 @@ import { CartComponent } from './cart/cart.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { BookService } from './books/book/book.service';
 import { CartService } from './shared/services/cart.service';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { CartService } from './shared/services/cart.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    AuthModule
   ],
   providers: [BookService,CartService],
   bootstrap: [AppComponent]

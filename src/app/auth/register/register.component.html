@@ -1,0 +1,35 @@
+<div class="flex justify-center">
+
+
+  <form (ngSubmit)="submit()" class="p-4 mt-20 rounded-lg border">
+    <h1 class="text-center text-xl">Register</h1>
+    <div class="my-5 w-full">
+      <label for="email">Email</label>
+      <input type="email" [(ngModel)]="form.email" #email="ngModel" name="email" placeholder="Email Address" id="email"
+        required class="p-2 rounder w-full border text-sm">
+    </div>
+    <div class="p-2 bg-red-300 text-red-800 rounded " *ngIf="email.invalid && (email.touched||email.dirty)"
+      [hidden]="email.valid">Email field must be valid</div>
+    <div class="my-5 w-full">
+      <label for="password">Password</label>
+      <input type="password" [(ngModel)]="form.password" #password="ngModel" name="password"
+        placeholder="Enter Password" required class="p-2 rounder w-full border text-sm">
+    </div>
+    <div class="p-2 bg-red-300 text-red-800 rounded " *ngIf="password.invalid && (password.touched||password.dirty)"
+      [hidden]="password.valid">Password field must be valid</div>
+
+    <div class="my-5 w-full">
+      <label for="confirm_password">Confirm Password</label>
+      <input type="password" [(ngModel)]="form.confirm_password" name="confirm_password"
+        placeholder="Enter Password Again" class="p-2 rounder w-full border text-sm">
+    </div>
+    <div class="my-5 w-full">
+      <button type="submit" class="p-2 w-full bg-purple-700 text-white hover:bg-purple-900 rounded">
+        <ng-container *ngIf="isLoading()">
+          Loading...
+        </ng-container>
+        <ng-container *ngIf="!isLoading()">Submit</ng-container>
+      </button>
+    </div>
+  </form>
+</div>
