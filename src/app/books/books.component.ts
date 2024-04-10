@@ -19,6 +19,7 @@ export class BooksComponent implements OnInit, OnDestroy {
     this.isVisible = true;
     this.books = this.bookService.getBooks();
     console.log({ oninit: 'on init' });
+    console.log({obserable_local_books: this.bookService.retrieveBooks()});
   }
 
 

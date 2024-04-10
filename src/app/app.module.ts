@@ -12,12 +12,14 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { BookService } from './books/book/book.service';
 import { CartService } from './shared/services/cart.service';
 import { AuthModule } from './auth/auth.module';
+import { SearchComponent } from './shared/search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     CartComponent,
+    SearchComponent,
   ],
   imports: [
     BrowserModule,

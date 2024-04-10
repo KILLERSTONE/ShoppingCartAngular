@@ -12,16 +12,9 @@ import {
   providedIn: 'root',
 })
 export class AuthService {
-
-
-  constructor(private router:Router){
-
-  }
+  constructor(private router: Router) {}
   isAuthenticated: boolean = false;
   isLoading: boolean = false;
-
-
-
 
   login(form: LoginForm) {
     if (this.isLoading) return;
@@ -33,7 +26,7 @@ export class AuthService {
         const user = userCredential.user;
         console.log(userCredential);
         this.isAuthenticated = true;
-        this.router.navigate([''])
+        this.router.navigate(['']);
         // ...
       })
       .catch((error) => {
@@ -64,14 +57,17 @@ export class AuthService {
       .finally(() => (this.isLoading = false));
   }
 
-  logout(){
-    const auth=getAuth();
-    signOut(auth).then(()=>{
-      console.log("Signed out");
-      this.isAuthenticated=false;
-      this.router.navigate(['login']);
-    }).catch((error)=>{
-      console.log(error.message);
-    });
+  logout() {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        console.log('Signed out');
+        this.isAuthenticated = false;
+        sessionStorage.clear();
+        this.router.navigate(['login']);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 }

@@ -1,13 +1,15 @@
-<li class="flex border rounded-x1 h-60">
-  <img [src]="book.src" [alt]="book.name" width="100px" class="m-auto rounder-sm">
-  <div>
-    <strong style="font-size: 18px">{{book.name| titlecase}}</strong> <br>By<br> <strong style="font-size: 15px">{{book.author|titlecase}}</strong>
-    <p class="text-lg">{{book.amount|currency:'INR'}}</p>
-    <p>{{quantity}}</p>
-  </div>
-
-  <div>
-    <button (click)="addToCart()" class="bg-yellow-400 rounded p-3">Add</button>
-    <button (click)="removeFromCart()" class="bg-yellow-400 rounded p-3" *ngIf="quantity>0">Remove</button>
-  </div>
-</li>
+  <li class="border rounded-xl border-2 border-purple-600 h-120">
+    <img [src]="book.src" [alt]="book.name" width="100px" class="m-auto rounded-sm">
+    <div class="grid justify-items-center">
+      <div>
+        <h3 class="text-lg font-semibold">{{ book.name | titlecase }}</h3>
+        <p class="text-gray-600">By {{ book.author | titlecase }}</p>
+        <p class="text-lg">{{ book.amount | currency:'INR' }}</p>
+        <p>{{ quantity }}</p>
+      </div>
+      <div class="mt-4">
+        <button (click)="addToCart()" class="bg-yellow-400 rounded p-3">Add</button>
+        <button (click)="removeFromCart()" class="bg-yellow-400 rounded p-3" *ngIf="quantity > 0">Remove</button>
+      </div>
+    </div>
+  </li>

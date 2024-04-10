@@ -1,21 +1,32 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../../shared/types/book';
+import { Observable, map, of } from 'rxjs';
 
 @Injectable()
 
 
 export class BookService {
 
-  getLocalBooks(){
+  getLocalBooks():Observable<Book[]>{
     const localBooks=localStorage.getItem('books');
-    if(localBooks) return JSON.parse(localBooks);
+    if(localBooks) return of(JSON.parse(localBooks));
+    else return of([]);
+  }
+
+  retrieveBooks():Book[]{
+    this.getLocalBooks().subscribe(
+      (books:Book[])=>{
+        return books;
+      }
+    );
+    return [];
   }
   setLocalBooks(books:Book[]){
     localStorage.setItem('books',JSON.stringify(books));
   }
   constructor() { }
 
-  getBooks(){
+  getBooks():Book[]{
     const localBooks=localStorage.getItem('books');
     if(localBooks) return JSON.parse(localBooks);
     return  [
@@ -56,4 +67,10 @@ export class BookService {
       },
     ];
   }
+
+
+
+
+
+
 }
