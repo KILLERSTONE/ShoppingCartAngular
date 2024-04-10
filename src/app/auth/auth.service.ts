@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import { LoginForm, RegisterForm } from 'app/shared/types/auth';
 import {
+  User,
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
@@ -70,4 +72,5 @@ export class AuthService {
         console.log(error.message);
       });
   }
+
 }

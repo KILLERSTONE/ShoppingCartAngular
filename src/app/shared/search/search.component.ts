@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SearchService } from '../services/search.service';
 import { Observable, Subscription } from 'rxjs';
-import { Book } from '../types/book';
+import { Book, BookWithQuantity } from '../types/book';
 import { tap, catchError } from 'rxjs/operators';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-search',
@@ -19,7 +20,7 @@ export class SearchComponent implements OnDestroy {
 
 
   searchQuery: string | undefined;
-  searchResult$: Book[] | undefined;
+  searchResult$: BookWithQuantity[] | undefined;
 
   isLoading: boolean = false;
   noResult: boolean = false;
@@ -48,6 +49,16 @@ export class SearchComponent implements OnDestroy {
       )
       .subscribe((result) => {
         this.searchResult$ = result;
+
       });
+  }
+
+  addToCart(book:BookWithQuantity):void{
+
+    this.searchService.addToCart(book);
+  }
+
+  removeFromCart(book:BookWithQuantity):void{
+    this.searchService.removeFromCart(book);
   }
 }

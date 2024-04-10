@@ -1,14 +1,34 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth'; // Import from compat module
+import { User } from 'firebase/auth'; // Correct import path for User
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
-  styleUrl: './admin.component.css'
+  styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit{
+export class AdminComponent implements OnInit {
+  users: User[] = [];
 
+  constructor(private http: HttpClient) {}
 
-  users$:Observable<User[]>
-  
+  ngOnInit(): void {
+    this.listAllUsers();
+  }
+
+  listAllUsers(): void {
+    this.http.get<any[]>('YOUR_CLOUD_FUNCTION_ENDPOINT')
+      .subscribe({
+        next: (users) => {
+          console.log('Users:', users);
+          // Assuming users is an array of User objects
+          this.users = users;
+        },
+        error: (error) => {
+          console.error('Error listing users:', error);
+        }
+      });
+  }
+
 }

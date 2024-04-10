@@ -16,6 +16,11 @@
               <h4 class="text-lg font-semibold">{{book.name}}</h4>
               <p class="text-gray-600">Author: {{book.author}}</p>
               <p class="text-purple-700">Price: {{book.amount | currency:'INR'}}</p>
+              <p class="text-yellow-900">Quantity: {{ book.quantity }}</p>
+              <div class="mt-4">
+                <button (click)="addToCart(book)" class="bg-yellow-400 rounded p-3">Add</button>
+                <button (click)="removeFromCart(book)" class="bg-yellow-400 rounded p-3" *ngIf="book.quantity > 0">Remove</button>
+              </div>
             </div>
           </div>
         </li>
