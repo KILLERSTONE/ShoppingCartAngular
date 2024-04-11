@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../shared/services/cart.service';
 import { Book } from '../shared/types/book';
 import { CartItems } from '../shared/types/cartItems';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-cart',

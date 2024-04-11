@@ -13,6 +13,7 @@ import { BookService } from './books/book/book.service';
 import { CartService } from './shared/services/cart.service';
 import { AuthModule } from './auth/auth.module';
 import { SearchComponent } from './shared/search/search.component';
+import { SellerModule } from './seller/seller.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SearchComponent } from './shared/search/search.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AuthModule
+    AuthModule,
+    SellerModule
   ],
   providers: [BookService,CartService],
   bootstrap: [AppComponent]

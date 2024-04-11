@@ -22,7 +22,6 @@ export class AdminComponent implements OnInit {
       .subscribe({
         next: (users) => {
           console.log('Users:', users);
-          // Assuming users is an array of User objects
           this.users = users;
         },
         error: (error) => {

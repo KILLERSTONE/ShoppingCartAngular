@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Book } from '../types/book';
 import { CartItems } from '../types/cartItems';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   cart: CartItems[] = [];
+  updatedCart: Subject<void> = new Subject<void>();
 
 
   constructor(){
@@ -27,6 +29,7 @@ export class CartService {
     if(index!==-1)return true;
     return false;
   }
+
 
   remove(book: Book): void {
     const index = this.cart.findIndex(item => item.book.id === book.id);
@@ -63,5 +66,8 @@ export class CartService {
 
   setCart():void{
     sessionStorage.setItem('cart',JSON.stringify(this.cart));
+    this.updatedCart.next();
   }
+
+  
 }

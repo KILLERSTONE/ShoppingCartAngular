@@ -1,0 +1,15 @@
+<div class="flex justify-center">
+  <div class="p-4 mt-20 border border-purple-600 rounded-lg inline-block">
+    <div *ngIf="book != null" class="text-center">
+      <img src="{{ book.src }}" class="w-64 h-64 object-contain mb-4">
+      <h2>{{ book.name }}</h2>
+      <p>Author: {{ book.author }}</p>
+      <p>Price: {{ book.amount | currency:'INR' }}</p>
+      <button (click)="deleteBook()" class="btn btn-danger mt-4 bg-yellow-200 rounded p-3 hover:bg-yellow-500 ">Delete</button>
+    </div>
+
+    <div *ngIf="book == null" class="text-center">
+      <p>Book with ID {{ book_id }} not found!</p>
+    </div>
+  </div>
+</div>

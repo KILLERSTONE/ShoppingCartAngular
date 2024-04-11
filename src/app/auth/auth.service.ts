@@ -9,14 +9,19 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from 'firebase/auth';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  logoutEvent: Subject<void> = new Subject<void>();
+
   constructor(private router: Router) {}
   isAuthenticated: boolean = false;
   isLoading: boolean = false;
+  isSeller:Boolean=false;
+  private SELLER="admin@ilink.com";
 
   login(form: LoginForm) {
     if (this.isLoading) return;
@@ -24,12 +29,17 @@ export class AuthService {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, form.email, form.password)
       .then((userCredential) => {
-        // Signed in
+
         const user = userCredential.user;
         console.log(userCredential);
         this.isAuthenticated = true;
+
+        if(form.email===this.SELLER){
+          this.isSeller=true;
+          this.router.navigate(['/seller']);
+        }
         this.router.navigate(['']);
-        // ...
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -45,16 +55,13 @@ export class AuthService {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, form.email, form.password)
       .then((userCredential) => {
-        // Signed up
         const user = userCredential.user;
 
         console.log(userCredential);
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        // ..
       })
       .finally(() => (this.isLoading = false));
   }
@@ -65,8 +72,10 @@ export class AuthService {
       .then(() => {
         console.log('Signed out');
         this.isAuthenticated = false;
-        sessionStorage.clear();
+        this.isSeller=false;
+        sessionStorage.removeItem('cart');
         this.router.navigate(['login']);
+        this.logoutEvent.next();
       })
       .catch((error) => {
         console.log(error.message);

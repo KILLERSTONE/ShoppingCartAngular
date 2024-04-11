@@ -1,0 +1,29 @@
+<div class="flex justify-center">
+  <form [formGroup]="addBookForm" (ngSubmit)="onSubmit()" class="p-4 mt-20 border border-purple-600 rounded-lg inline-block">
+    <h1 class="text-xl text-center">Add New Book</h1>
+    <div class="my-2">
+      <label for="ID" class="mr-4">ID:</label>
+      <input type="number" class="form-control" id="ID" formControlName="ID" placeholder="Enter ID">
+    </div>
+    <div class="my-2">
+      <label for="name" class="mr-4">Name:</label>
+      <input type="text" class="form-control" id="name" formControlName="name" placeholder="Enter Name">
+    </div>
+    <div class="my-2">
+      <label for="author" class="mr-4">Author:</label>
+      <input type="text" class="form-control" id="author" formControlName="author" placeholder="Enter Author">
+    </div>
+    <div class="my-2">
+      <label for="src" class="mr-4">Image URL:</label>
+      <input type="text" class="form-control" id="src" formControlName="src" placeholder="Enter Image URL">
+    </div>
+    <div class="my-2">
+      <label for="amount" class="mr-4">Amount:</label>
+      <input type="text" class="form-control" id="amount" formControlName="amount" placeholder="Enter Amount">
+    </div>
+    <div class="my-2 text-center">
+      <button type="submit" class="btn btn-primary mt-4 bg-purple-400 rounded p-3 hover:bg-purple-600">Add Book</button>
+    </div>
+    <p *ngIf="duplicateId" class="my-3 text-danger">Book already exists with that ID</p>
+  </form>
+</div>

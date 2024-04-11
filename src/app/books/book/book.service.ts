@@ -21,9 +21,13 @@ export class BookService {
     );
     return [];
   }
+
+  
+
   setLocalBooks(books:Book[]){
     localStorage.setItem('books',JSON.stringify(books));
   }
+
   constructor() { }
 
   getBooks():Book[]{

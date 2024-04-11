@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate{
 
     canActivate(){
       return this.authService.isAuthenticated;
-    
+
   }
 }
 export const authGuard: CanActivateFn = (route, state) => {

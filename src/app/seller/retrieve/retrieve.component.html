@@ -1,0 +1,22 @@
+<div>
+  <h2 class="text-xl font-bold mb-4 text-center">Seller Panel</h2>
+  <div class="mt-4 text-center mb-10">
+    <button [routerLink]="['/create']" class="bg-purple-500 text-white px-4 py-2 rounded">Add New Book</button>
+  </div>
+  <div *ngFor="let book of books" class="border rounded p-4 mb-4">
+    <div class="flex items-center">
+      <div>
+        <img [src]="book.src" [alt]="book.name" width="100px" class="mr-4">
+      </div>
+      <div>
+        <h3 class="text-lg font-semibold">{{ book.name | titlecase }}</h3>
+        <p class="text-gray-600">By {{ book.author | titlecase }}</p>
+        <p class="text-lg">{{ book.amount | currency:'INR' }}</p>
+      </div>
+      <div class="ml-auto">
+        <button [routerLink]="['/seller/edit', book.id]" class="bg-blue-500 text-white px-4 py-2 rounded mr-2">Edit</button>
+        <button [routerLink]="['/seller/delete', book.id]" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
