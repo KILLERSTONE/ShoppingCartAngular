@@ -1,12 +1,21 @@
-<div class="books-container">
-  <button class="book-toggle-button" (click)="toggleBooks()">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQesEmX4No442JnYACY0GHeMOlPjnj0SCsymbtK4Ho2lQ&s" width="50px">
-  </button>
-
-  <ul *ngIf="isVisible" class="flex flex-wrap justify-center">
+<div class="books-container p-6">
+  <!-- Display unfiltered books -->
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6" *ngIf="!filteredBooks">
     <ng-container *ngFor="let singlebook of books; let i=index;">
-      <app-book [book]="singlebook" class="w-1/2 p-5"></app-book>
+      <li class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
+        <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white">
+        </app-book>
+      </li>
     </ng-container>
   </ul>
 
+  <!-- Display filtered books -->
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6" *ngIf="filteredBooks && filteredBooks.length > 0">
+    <ng-container *ngFor="let singlebook of filteredBooks; let i=index;">
+      <li class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
+        <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white">
+        </app-book>
+      </li>
+    </ng-container>
+  </ul>
 </div>

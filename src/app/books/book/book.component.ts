@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Book } from '../../shared/types/book';
 import { CartService } from '../../shared/services/cart.service';
-import { AuthService } from 'app/auth/auth.service';
+import {Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-book',
@@ -20,12 +20,18 @@ export class BookComponent implements OnDestroy,OnInit{
 
   @Output() bookEmitter = new EventEmitter<Book>(); //Child to parent is done using @Output
   quantity:number=0;
+  quantitySubscription:Subscription;
 
   constructor(private cartService: CartService) {
 
+    this.quantitySubscription=new Subscription();
+
   }
   ngOnDestroy(): void {
-    this.quantity=0;
+
+    if (this.quantitySubscription) {
+      this.quantitySubscription.unsubscribe();
+    }
   }
   bookTotal(book: Book) {
     return book.amount * this.cartService.getBookQuantity(book);
@@ -37,10 +43,13 @@ export class BookComponent implements OnDestroy,OnInit{
   addToCart(): void {
     this.cartService.add(this.book);
     this.quantity=this.getBookQuantity(this.book);
+    this.bookEmitter.emit(this.book);
   }
   removeFromCart(): void {
     this.cartService.remove(this.book);
     this.quantity=this.getBookQuantity(this.book);
+    this.bookEmitter.emit(this.book);
+
   }
 
   getBookQuantity(book: Book): number {
@@ -48,6 +57,10 @@ export class BookComponent implements OnDestroy,OnInit{
   }
   ngOnInit() {
     this.quantity=this.cartService.getBookQuantity(this.book);
+
+    this.quantitySubscription = this.cartService.quantityEmitter.subscribe((quantity) => {
+      this.quantity = this.cartService.getBookQuantity(this.book);
+    });
   }
 
 }

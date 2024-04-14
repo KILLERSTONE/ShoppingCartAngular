@@ -8,6 +8,7 @@
   import { SearchComponent } from './shared/search/search.component';
 import { SellerGuard } from './seller/seller.guard';
 import { SellerModule } from './seller/seller.module';
+import { MypipeComponent } from './mypipe/mypipe.component';
 
   const routes: Routes = [
     {
@@ -32,6 +33,10 @@ import { SellerModule } from './seller/seller.module';
       path: 'seller',
       loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule),
       canActivate: [SellerGuard]
+    },
+    {
+      path:'testpipe',component:MypipeComponent
+
     }
   ];
 

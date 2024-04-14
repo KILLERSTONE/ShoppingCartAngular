@@ -14,6 +14,8 @@ import { CartService } from './shared/services/cart.service';
 import { AuthModule } from './auth/auth.module';
 import { SearchComponent } from './shared/search/search.component';
 import { SellerModule } from './seller/seller.module';
+import { MyPipePipe } from './mypipe/my-pipe.pipe';
+import { MypipeComponent } from './mypipe/mypipe.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +23,16 @@ import { SellerModule } from './seller/seller.module';
     NavbarComponent,
     CartComponent,
     SearchComponent,
+    MyPipePipe,
+    MypipeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     AuthModule,
-    SellerModule
+    SellerModule,
+    BooksModule
   ],
   providers: [BookService,CartService],
   bootstrap: [AppComponent]

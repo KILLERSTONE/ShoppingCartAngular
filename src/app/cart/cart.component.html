@@ -1,43 +1,45 @@
-<div class="cart-container">
-  <button class="cart-toggle-button" (click)="toggleCart()"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgod-79GgFjBbJb-LYmrfPUm3S_MXk3mReBipwcm8Wdw&s" width="50px"></button>
+<div class="cart-container border border-gray-300 rounded-lg p-4 mt-6 relative">
+  <button class="cart-toggle-button absolute top-4 right-4 bg-transparent border-none">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgod-79GgFjBbJb-LYmrfPUm3S_MXk3mReBipwcm8Wdw&s" width="30px" alt="Toggle Cart">
+  </button>
 
   <div class="visible-cart-class" *ngIf="isVisible">
-  <h1>Cart</h1>
-  <table class="cart-table">
-    <thead>
-      <tr>
-        <th class="left-align">Product</th>
-        <th>Quantity</th>
-        <th>Price</th>
-        <th>Total</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of getCart(); let i=index">
-        <td>
-          <img src="{{ item.book.src }}" alt="{{ item.book.name }}" width="50px" class="book-image">
-          <div class="book-details">
-            <h2>{{ item.book.name }}</h2>
-            <h5>By</h5>
-            <h4>{{item.book.author}}</h4>
-          </div>
-
-        </td>
-        <td>
-
-          {{ item.quantity }}
-          <button (click)="addBook(item)">+</button>
-        </td>
-        <td>{{ item.book.amount | currency:'INR' }}</td>
-        <td>{{ item.quantity * item.book.amount | currency:'INR' }}</td>
-        <td><button (click)="removeBook(item)">Remove</button></td>
-      </tr>
-      <tr>
-        <td colspan="3" class="total-label">Total:</td>
-        <td class="total-value" colspan="2">{{ total() | currency:'INR' }}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <h1 class="text-center text-xl font-semibold mb-4">Cart</h1>
+    <table class="w-full border-collapse shadow-md">
+      <thead>
+        <tr>
+          <th class="border py-2 px-4 text-center">Product</th>
+          <th class="border py-2 px-4 text-center">Quantity</th>
+          <th class="border py-2 px-4 text-center">Price</th>
+          <th class="border py-2 px-4 text-center">Total</th>
+          <th class="border"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of getCart(); let i=index">
+          <td class="border py-2 px-4">
+            <img [src]="item.book.src" [alt]="item.book.name" width="50px" class="mx-auto rounded-sm">
+            <div class="book-details">
+              <h2 class="text-lg font-semibold">{{ item.book.name }}</h2>
+              <h5 class="text-gray-600">By</h5>
+              <h4 class="text-sm">{{ item.book.author }}</h4>
+            </div>
+          </td>
+          <td class="border py-2 px-4">
+            <span>{{ item.quantity }}</span>
+            <button (click)="addBook(item)" class="bg-blue-500 text-white rounded-full px-3 py-1 ml-2">+</button>
+          </td>
+          <td class="border py-2 px-4">{{ item.book.amount | currency:'INR' }}</td>
+          <td class="border py-2 px-4">{{ item.quantity * item.book.amount | currency:'INR' }}</td>
+          <td class="border py-2 px-4">
+            <button (click)="removeBook(item)" class="bg-red-500 text-white rounded-full px-3 py-1">Remove</button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3" class="border py-2 px-4 text-right font-semibold">Total:</td>
+          <td colspan="2" class="border py-2 px-4 font-semibold">{{ total() | currency:'INR' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

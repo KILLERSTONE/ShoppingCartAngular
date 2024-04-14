@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { SearchService } from '../services/search.service';
-import { Observable, Subscription } from 'rxjs';
-import { Book, BookWithQuantity } from '../types/book';
+import { Subscription } from 'rxjs';
+import { Book } from '../types/book';
 import { tap, catchError } from 'rxjs/operators';
 import { CartService } from '../services/cart.service';
 
@@ -11,24 +11,26 @@ import { CartService } from '../services/cart.service';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnDestroy {
+  private searchResultSubscription: Subscription | undefined;
+
   constructor(private searchService: SearchService) {}
-  private searchResultSubscription: Subscription = new Subscription();
 
   ngOnDestroy(): void {
-    this.searchResultSubscription.unsubscribe();
+    if (this.searchResultSubscription) {
+      this.searchResultSubscription.unsubscribe();
+    }
   }
 
-
   searchQuery: string | undefined;
-  searchResult$: BookWithQuantity[] | undefined;
+  searchResult: Book[] = [];
 
   isLoading: boolean = false;
   noResult: boolean = false;
 
   searchBooks(): void {
     if (!this.searchQuery) {
-      this.searchResult$ = undefined;
       this.noResult = false;
+      this.searchResult=[];
       return;
     }
 
@@ -37,9 +39,11 @@ export class SearchComponent implements OnDestroy {
     this.searchResultSubscription = this.searchService
       .searchBooks(this.searchQuery)
       .pipe(
-        tap(() => {
+        tap((result) => {
           this.isLoading = false;
-          this.noResult = false;
+          this.noResult = result.length === 0;
+          this.searchResult = result; // Assign search result to searchResult property
+          console.log(this.searchResult);
         }),
         catchError(() => {
           this.isLoading = false;
@@ -47,18 +51,14 @@ export class SearchComponent implements OnDestroy {
           return [];
         })
       )
-      .subscribe((result) => {
-        this.searchResult$ = result;
-
-      });
+      .subscribe();
   }
 
-  addToCart(book:BookWithQuantity):void{
-
+  addToCart(book: Book): void {
     this.searchService.addToCart(book);
   }
 
-  removeFromCart(book:BookWithQuantity):void{
+  removeFromCart(book: Book): void {
     this.searchService.removeFromCart(book);
   }
 }

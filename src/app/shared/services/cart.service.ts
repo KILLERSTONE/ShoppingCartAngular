@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Book } from '../types/book';
 import { CartItems } from '../types/cartItems';
 import { Subject } from 'rxjs';
+import { EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ import { Subject } from 'rxjs';
 export class CartService {
   cart: CartItems[] = [];
   updatedCart: Subject<void> = new Subject<void>();
-
+  quantityEmitter:EventEmitter<number>=new EventEmitter<number>();
 
   constructor(){
     this.getCart();
@@ -22,7 +23,9 @@ export class CartService {
       this.cart.push({book,quantity:1});
     }
 
+    this.quantityEmitter.emit(this.getBookQuantity(book));
     this.setCart();
+
   }
   exist(book:Book):boolean{
     const index=this.cart.findIndex(item=>item.book.id===book.id);
@@ -40,6 +43,8 @@ export class CartService {
       if (this.cart[index].quantity === 0) {
         this.cart.splice(index, 1);
       }
+
+      this.quantityEmitter.emit(this.getBookQuantity(book));
       this.setCart();
     }
   }
@@ -67,7 +72,8 @@ export class CartService {
   setCart():void{
     sessionStorage.setItem('cart',JSON.stringify(this.cart));
     this.updatedCart.next();
+
   }
 
-  
+
 }
