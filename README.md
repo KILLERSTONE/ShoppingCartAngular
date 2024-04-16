@@ -22,8 +22,9 @@
 - **Delete**
 - **Retrieve**
 - **Update**
-- **Cart**
-- **mypipe (Custom Pipe created)**
+
+#### **Cart**
+#### **mypipe (Custom Pipe created)**
 
 ### Shared
 - **Navbar**
@@ -33,7 +34,7 @@
 
 - **auth** (LoginForm, RegisterForm)
 - **book**
-  - **cartitems** (implements book with new variable quantity)
+  - **cartitems** (implements book with new variable `quantity`)
 
 ## Storage Mechanism
 
