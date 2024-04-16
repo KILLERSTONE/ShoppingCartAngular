@@ -86,3 +86,9 @@
 
 - Since search was to be integreated into Books directly used SearchServices in BooksComponent to perform search functionality
 - There are two Searches one which is Responsible to list in home page another which works as a component
+
+
+# Credentials
+
+  ## normal user- `jeewan@ilink.com`
+  ## seller user- `seller@ilink.com`
