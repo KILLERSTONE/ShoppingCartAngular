@@ -1,27 +1,87 @@
-# Day1App
+# BookCart -Jeewan Ghimire
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
+## Modules
 
-## Development server
+### Core
+- **Books**
+- **Seller**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Shared
+- **Auth**
 
-## Code scaffolding
+## Components
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Core
+#### Books
+- **Book**
+#### Auth
+- **Login**
+- **Signup**
+#### Seller
+- **Create**
+- **Delete**
+- **Retrieve**
+- **Update**
+- **Cart**
+- **mypipe (Custom Pipe created)**
 
-## Build
+### Shared
+- **Navbar**
+- **Footer**
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Types(Structure)
 
-## Running unit tests
+- **auth** (LoginForm, RegisterForm)
+- **book**
+  - **cartitems** (implements book with new variable quantity)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Storage Mechanism
 
-## Running end-to-end tests
+- **LocalStorage:** 
+  - `book.services` implements local storage to update or retrieve `book[]` from the local storage, stored as 'books'.
+- **SessionStorage:** 
+  - `cart.services` implements session storage to add books into cart as a session item named 'cart'. Cart is reset on logout.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Input and Output Operators
 
-## Further help
+- Mapped Books and Book as parent and child using `@Output` and `@Input`, with output to emit the book and input to get the books.
+- Similarly mapped Search and Books component to print the Book from Books component which match search parameter. Searched book is returned to Books using `@Input`.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Angular Forms and Form Validation
+
+- Forms for register and login inside the auth module with various Angular conditions (e.g., `ngIf`, `ngModel`) for form manipulation.
+- Implemented `FormsModule`.
+- Used Firebase email/password as the authentication mechanism.
+
+## Services
+
+- **AuthService**
+- **CartService**
+- **CurdService**
+- **SearchService**
+- **BookService**
+
+## Observables
+
+- Created a function `getLocalBooks()` in `book.services` which gets books in the form of Observables.
+
+## Subscriptions
+
+- Search service uses subscription to subscribe the books from the `BookServices` and uses pipes to filter the books for search functionality.
+- Subscriptions are consumed by `SearchComponent`. Unsubscribed on destroy.
+
+## Lazy Loading
+
+- Lazy loading added to the seller page, accessible only to authorized users with `isSeller=true`.
+
+## Auth Guard
+
+- Two auth guards created: `AuthGuard` and `SellerGuard`.
+  - `AuthGuard` checks `isAuthenticated` from `AuthServices` for access to the cart component.
+  - `SellerGuard` checks `isSeller` from `AuthServices` specifically in LoginComponent for access to the seller component.
+
+
+## Search Service
+
+- Since search was to be integreated into Books directly used SearchServices in BooksComponent to perform search functionality
+- There are two Searches one which is Responsible to list in home page another which works as a component

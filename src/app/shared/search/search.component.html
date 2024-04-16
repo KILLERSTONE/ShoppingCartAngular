@@ -1,20 +1,30 @@
 <div id="search-nav" class="p-4 grid justify-items-center">
-  <div class="mb-4">
-    <input type="search" [(ngModel)]="searchQuery" (input)="searchBooks()" placeholder="Enter book name or author" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500">
+  <div class="mb-4 mr-4">
+    <input type="search" [(ngModel)]="authorName" (input)="searchBooks()" placeholder="Enter author name" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500">
+    <input type="search" [(ngModel)]="bookTitle" (input)="searchBooks()" placeholder="Enter book title" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500">
   </div>
 
-  <ng-container *ngIf="searchResult.length > 0; else noResult">
+  <div class="mb-4">
+
+  </div>
+  <ng-container *ngIf="searchResult.length > 0;">
     <h3 class="text-xl font-bold mb-2">
       Search Result
     </h3>
-    <div class="border border-gray-300 rounded-md p-4 bg-gray-50" >
-      <app-books [filteredBooks]="searchResult"></app-books>
+    <div class="border border-gray-300 rounded-md p-4 bg-gray-50">
+      <div *ngFor="let book of searchResult; let last = last" class="mb-4 flex items-start">
+        <div class="flex-grow">
+          <div class="font-bold">{{ book.name }}</div>
+          <div class="text-gray-500">Author: {{ book.author }}</div>
+          <div class="text-gray-500">Price: {{ book.amount | currency:'INR' }}</div>
+        </div>
+        <img [src]="book.src" alt="{{ book.name }}" class="w-32 h-32 object-cover mt-2 ml-auto">
+      </div>
     </div>
   </ng-container>
-
-  <ng-template #noResult>
-    <p class="text-red-500">No books found</p>
-  </ng-template>
+  
+  
+  
 
   <ng-template #isLoading>
     <p class="text-gray-500">Loading...</p>

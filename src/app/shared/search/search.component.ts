@@ -1,9 +1,8 @@
-import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { SearchService } from '../services/search.service';
+import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Book } from '../types/book';
 import { tap, catchError } from 'rxjs/operators';
-import { CartService } from '../services/cart.service';
+import { SearchService } from '../services/search.service';
+import { Book } from '../types/book';
 
 @Component({
   selector: 'app-search',
@@ -21,33 +20,27 @@ export class SearchComponent implements OnDestroy {
     }
   }
 
-  searchQuery: string | undefined;
+  authorName: string = '';
+  bookTitle: string = '';
   searchResult: Book[] = [];
 
   isLoading: boolean = false;
-  noResult: boolean = false;
 
   searchBooks(): void {
-    if (!this.searchQuery) {
-      this.noResult = false;
-      this.searchResult=[];
-      return;
-    }
-
     this.isLoading = true;
-
+    
     this.searchResultSubscription = this.searchService
-      .searchBooks(this.searchQuery)
+      .searchBooks(this.bookTitle , this.authorName) 
       .pipe(
         tap((result) => {
           this.isLoading = false;
-          this.noResult = result.length === 0;
-          this.searchResult = result; // Assign search result to searchResult property
-          console.log(this.searchResult);
+          if (!this.bookTitle && !this.authorName) {
+          } else {
+          }
+          this.searchResult = result;
         }),
         catchError(() => {
           this.isLoading = false;
-          this.noResult = true;
           return [];
         })
       )

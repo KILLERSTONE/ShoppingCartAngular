@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BookService } from 'app/books/book/book.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { Book } from '../types/book';
 import { CartService } from './cart.service';
 
@@ -21,13 +21,36 @@ export class SearchService {
     });
   }
 
-  searchBooks(query: string): Observable<Book[]> {
+  searchBooks(title: string,authorName:string): Observable<Book[]> {
+
+    if(!authorName && !title){
+      
+      return of([]);
+    }
+    if(!authorName){
+      return this.getAllBooks().pipe(
+        map((books) => {
+          return books.filter(
+            (book) => book.name?.toLowerCase().includes(title.toLowerCase())
+          );
+        })
+      );
+    }
+    if (!title) {
+      return this.getAllBooks().pipe(
+        map((books) => {
+          return books.filter(
+            (book) => book.author?.toLowerCase().includes(authorName.toLowerCase())
+          );
+        })
+      );
+    }
     return this.getAllBooks().pipe(
       map((books) => {
         return books.filter(
           (book) =>
-            book.name?.toLowerCase().includes(query.toLowerCase()) ||
-            book.author?.toLowerCase().includes(query.toLowerCase())
+            book.name?.toLowerCase().includes(title.toLowerCase()) &&
+            book.author?.toLowerCase().includes(authorName.toLowerCase())
         );
       })
     );

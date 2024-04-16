@@ -58,6 +58,7 @@ export class AuthService {
         const user = userCredential.user;
 
         console.log(userCredential);
+        this.router.navigate(['/login']);
       })
       .catch((error) => {
         const errorCode = error.code;

@@ -1,21 +1,33 @@
-<div class="books-container p-6 " >
-  <!-- Display unfiltered books -->
-  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6" *ngIf="!filteredBooks">
-    <ng-container *ngFor="let singlebook of books; let i=index;">
-      <li class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
-        <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white">
-        </app-book>
-      </li>
-    </ng-container>
-  </ul>
+<div id="search-nav" class="p-4 grid justify-items-center">
+  <div class="mb-8  rounded-md border border-purple-200 p-4">
+    <h3 class="text-2xl font-bold mb-4 text-center">Search</h3>
 
-  <!-- Display filtered books -->
-  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6" *ngIf="filteredBooks && filteredBooks.length > 0">
-    <ng-container *ngFor="let singlebook of filteredBooks; let i=index;">
-      <li class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
-        <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white"></app-book>
-      </li>
-    </ng-container>
-  </ul>
+    <input type="search" [(ngModel)]="authorName" (input)="searchBooks()" placeholder="Enter author name" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500 mb-2">
+    <input type="search" [(ngModel)]="bookTitle" (input)="searchBooks()" placeholder="Enter book title" class="px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-purple-500 mb-4">
+  </div>
 
-</div>
+  <div class="mb-8">
+    <div class="rounded-md border border-purple-300 bg-gray-100 p-4" *ngIf="filteredBooks && (authorName || bookTitle)">
+      <h3 class="text-2xl font-bold mb-4 text-center" *ngIf="filteredBooks.length > 0">Search Result</h3>
+      <h2 class="text-2xl font-bold mb-4 text-center" *ngIf="filteredBooks.length <= 0 && (authorName || bookTitle)">No results found</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <ng-container *ngFor="let singlebook of filteredBooks">
+          <div class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
+            <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white"></app-book>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  
+  <div class="rounded-md border border-purple-300 p-4">
+    <h3 class="text-2xl font-bold mb-4 text-center">Current Listing</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <ng-container *ngFor="let singlebook of books">
+        <div class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
+          <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)"></app-book>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  
