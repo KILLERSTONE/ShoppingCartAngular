@@ -90,5 +90,5 @@
 
 # Credentials
 
-  ## normal user- `jeewan@ilink.com`
-  ## seller user- `seller@ilink.com`
+  ## normal user- `jeewan@ilink.com`,`jeewan123`
+  ## seller user- `admin@ilink.com`,`admin123`
