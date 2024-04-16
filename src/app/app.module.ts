@@ -16,6 +16,7 @@ import { SearchComponent } from './shared/search/search.component';
 import { SellerModule } from './seller/seller.module';
 import { MyPipePipe } from './mypipe/my-pipe.pipe';
 import { MypipeComponent } from './mypipe/mypipe.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { MypipeComponent } from './mypipe/mypipe.component';
     CartComponent,
     SearchComponent,
     MyPipePipe,
-    MypipeComponent
+    MypipeComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

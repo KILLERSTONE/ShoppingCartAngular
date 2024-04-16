@@ -28,9 +28,7 @@ export class BooksComponent implements OnInit, OnDestroy {
   inputText: string = '';
 
   loadBooks() {
-    // Load all books from the book service
     this.books = this.bookService.getBooks();
-    // Initially, set filtered books to be the same as all books
     if (!this.filteredBooks.length) {
       this.filteredBooks = this.books;
     }

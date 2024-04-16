@@ -3,7 +3,7 @@
   <div class="mt-4 text-center mb-10">
     <button [routerLink]="['/create']" class="bg-purple-500 text-white px-4 py-2 rounded">Add New Book</button>
   </div>
-  <div *ngFor="let book of books" class="border rounded p-4 mb-4">
+  <div *ngFor="let book of books" class="border rounded p-4 mb-4 bg-gray-100 hover:bg-gray-200">
     <div class="flex items-center">
       <div>
         <img [src]="book.src" [alt]="book.name" width="100px" class="mr-4">

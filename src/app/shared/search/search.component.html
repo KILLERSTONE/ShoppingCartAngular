@@ -7,7 +7,9 @@
     <h3 class="text-xl font-bold mb-2">
       Search Result
     </h3>
-    <app-books [filteredBooks]="searchResult"></app-books>
+    <div class="border border-gray-300 rounded-md p-4 bg-gray-50" >
+      <app-books [filteredBooks]="searchResult"></app-books>
+    </div>
   </ng-container>
 
   <ng-template #noResult>

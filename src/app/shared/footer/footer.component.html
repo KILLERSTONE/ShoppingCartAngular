@@ -1,0 +1,27 @@
+<footer class="bg-purple-900 text-white py-6 relative">
+  <div class="container mx-auto flex justify-between items-center">
+    <ul class="nav-links flex flex-grow justify-end">
+      <li>
+        <a href="#" class="mx-4 hover:text-gray-300 transition duration-300">About Us</a>
+      </li>
+      <li>
+        <a href="mailto:jeewan.ghimire@ilink-systems.com" class="mx-4 hover:text-gray-300 transition duration-300">Contact Us</a>
+      </li>
+      <li>
+        <a href="#" class="mx-4 hover:text-gray-300 transition duration-300">Privacy Policy</a>
+      </li>
+      <li>
+        <a routerLink="/testpipe" class="mx-4 hover:text-gray-300 transition duration-300">Custom Pipe</a>
+      </li>
+    </ul>
+    <div class="text-gray-300">
+      &copy; 2024 Book Shop
+    </div>
+    <button (click)="scrollToTop()" class="bg-gray-300 hover:bg-gray-400 text-white py-2 px-4 rounded-full flex items-center absolute bottom-4 right-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/>
+      </svg>
+      <span class="hidden md:inline">Back to Top</span>
+    </button>
+  </div>
+</footer>

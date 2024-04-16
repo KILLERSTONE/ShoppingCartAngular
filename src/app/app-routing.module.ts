@@ -31,8 +31,8 @@ import { MypipeComponent } from './mypipe/mypipe.component';
     },
     {
       path: 'seller',
-      loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule),
-      canActivate: [SellerGuard]
+      loadChildren: () => import('./seller/seller.module').then(m => m.SellerModule)
+      ,canActivate: [SellerGuard]
     },
     {
       path:'testpipe',component:MypipeComponent

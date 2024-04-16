@@ -1,4 +1,4 @@
-<div class="books-container p-6">
+<div class="books-container p-6 " >
   <!-- Display unfiltered books -->
   <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6" *ngIf="!filteredBooks">
     <ng-container *ngFor="let singlebook of books; let i=index;">
@@ -13,9 +13,9 @@
   <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6" *ngIf="filteredBooks && filteredBooks.length > 0">
     <ng-container *ngFor="let singlebook of filteredBooks; let i=index;">
       <li class="rounded-lg overflow-hidden shadow-md transition duration-300 ease-in-out transform hover:shadow-lg hover:bg-gray-50">
-        <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white">
-        </app-book>
+        <app-book [book]="singlebook" (bookEmitter)="handleBookEvent($event)" class="p-5 bg-white"></app-book>
       </li>
     </ng-container>
   </ul>
+
 </div>

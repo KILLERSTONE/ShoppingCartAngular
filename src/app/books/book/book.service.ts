@@ -22,7 +22,7 @@ export class BookService {
     return [];
   }
 
-  
+
 
   setLocalBooks(books:Book[]){
     localStorage.setItem('books',JSON.stringify(books));
@@ -69,6 +69,20 @@ export class BookService {
         src: 'https://m.media-amazon.com/images/I/71Qde+ZerdL._AC_UF350,350_QL50_.jpg',
         amount: 650,
       },
+      {
+        id:6,
+        name:'The C Programming Language 2e',
+        author:'Brian W. Kernighan, Dennis Ritchie',
+        src:'https://m.media-amazon.com/images/I/51L7aRvbU-L._AC_UF1000,1000_QL80_.jpg',
+        amount:8617,
+      },
+      {
+        id: 7,
+        name:'Rust for Rustaceans: Idiomatic Programmi',
+        author: 'Jon Gjengset',
+        src: 'https://m.media-amazon.com/images/I/51s3gbiU20S.jpg',
+        amount:2039,
+      }
     ];
   }
 
