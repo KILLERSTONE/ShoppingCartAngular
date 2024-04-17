@@ -53,6 +53,7 @@
 - Forms for register and login inside the auth module with various Angular conditions (e.g., `ngIf`, `ngModel`) for form manipulation.
 - Implemented `FormsModule`.
 - Used Firebase email/password as the authentication mechanism.
+- Added Google Login services for Single signin using Google authentication
 
 ## Services
 
