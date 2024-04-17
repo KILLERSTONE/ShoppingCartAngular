@@ -3,6 +3,7 @@ import { LoginForm } from '../../shared/types/auth';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import { AuthService } from '../auth.service';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  faGoogle=faGoogle;
 
   form:LoginForm={
     email:'',
@@ -24,5 +26,13 @@ export class LoginComponent {
 
   isLoading():boolean{
     return this.authService.isLoading;
+  }
+
+  ssoSubmit(){
+    this.authService.ssoLogin();
+  }
+
+  redirectRegister(){
+    this.authService.redirectRegister();
   }
 }

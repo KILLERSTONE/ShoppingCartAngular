@@ -8,6 +8,8 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   signOut,
+  GoogleAuthProvider,
+  signInWithPopup
 } from 'firebase/auth';
 import { Subject } from 'rxjs';
 
@@ -83,4 +85,36 @@ export class AuthService {
       });
   }
 
+  ssoLogin() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        if (credential) {
+          const token = credential.accessToken;
+          const user = result.user;
+          console.log(token,user);
+          this.isAuthenticated = true;
+          this.router.navigate(['']);
+        } else {
+          console.error('Credential is null');
+        }
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        const email = error.customData?.email;
+        const credential = GoogleAuthProvider.credentialFromError(error);
+      });
+  }
+
+  redirectLogin(){
+    this.router.navigate(['/login']);
+  }
+
+  redirectRegister(){
+    this.router.navigate(['/register']);
+  }
 }

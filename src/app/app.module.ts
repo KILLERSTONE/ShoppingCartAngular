@@ -17,6 +17,7 @@ import { SellerModule } from './seller/seller.module';
 import { MyPipePipe } from './mypipe/my-pipe.pipe';
 import { MypipeComponent } from './mypipe/mypipe.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { FooterComponent } from './shared/footer/footer.component';
     FormsModule,
     AuthModule,
     SellerModule,
-    BooksModule
+    BooksModule,
+    FontAwesomeModule
   ],
   providers: [BookService,CartService],
   bootstrap: [AppComponent]

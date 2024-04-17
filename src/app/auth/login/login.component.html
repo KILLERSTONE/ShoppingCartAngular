@@ -1,23 +1,40 @@
-<div class="flex justify-center items-center h-screen bg-gray-200">
-  <form #mgForm="ngForm" (ngSubmit)="submit()" class="w-full max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8">
+<div class="flex justify-center items-center h-screen bg-gray-200" style="background-image: url('/assets/images/auth.jpg'); background-size: cover;">
+  <form (ngSubmit)="submit()" class="w-full max-w-sm bg-white shadow-md rounded px-8 pt-6 pb-8">
     <h1 class="text-center text-2xl font-bold mb-8">Login</h1>
     <div class="mb-4">
       <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-      <input type="email" [(ngModel)]="form.email" #email="ngModel" name="email" placeholder="Email Address" id="email" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <input type="email" [(ngModel)]="form.email" #email="ngModel" name="email" placeholder="Type your email" id="email" required class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <div class="p-2 bg-red-300 text-red-800 rounded" *ngIf="email.invalid && (email.touched || email.dirty)">
+        Email is required
+      </div>
     </div>
-    <div class="mb-6">
+    <div class="mb-4">
       <label for="password" class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-      <input type="password" [(ngModel)]="form.password" #password="ngModel" name="password" placeholder="Enter Password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <input type="password" [(ngModel)]="form.password" #password="ngModel" name="password" placeholder="Type your password" required class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+      <div class="p-2 bg-red-300 text-red-800 rounded" *ngIf="password.invalid && (password.touched || password.dirty)">
+        Password is required
+      </div>
     </div>
-    <div class="flex items-center justify-between">
-      <button type="submit" [disabled]="mgForm.form.invalid" class="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+
+    <div class="text-center mb-4">
+      <button type="submit" class="bg-purple-700 hover:bg-purple-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
         <ng-container *ngIf="isLoading()">
           Loading...
         </ng-container>
-        <ng-container *ngIf="!isLoading()">
-          Sign In
-        </ng-container>
+        <ng-container *ngIf="!isLoading()">Login</ng-container>
       </button>
+    </div>
+
+    <div class="text-center mt-4">
+      <span class="block mb-2">Or Login Using</span>
+      <div class="flex justify-center">
+        <a class="mr-2" (click)="ssoSubmit()">
+          <fa-icon [icon]="faGoogle" class="text-blue-700 hover:text-blue-900"></fa-icon>
+        </a>
+      </div>
+      <div class="mt-4">
+        <span class="block">Don't have an account? <a (click)="redirectRegister()" class="text-blue-500 hover:text-blue-700">Sign Up</a></span>
+      </div>
     </div>
   </form>
 </div>
