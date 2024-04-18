@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { CartService } from 'app/shared/services/cart.service';
 import { LoginForm, RegisterForm } from 'app/shared/types/auth';
 import {
-  User,
   createUserWithEmailAndPassword,
   getAuth,
   signInWithEmailAndPassword,
@@ -19,11 +19,15 @@ import { Subject } from 'rxjs';
 export class AuthService {
   logoutEvent: Subject<void> = new Subject<void>();
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private cartService:CartService) {
+    const sessionAuth = sessionStorage.getItem('Authenticated');
+    this.isAuthenticated = sessionAuth === 'true';
+  }
+
   isAuthenticated: boolean = false;
   isLoading: boolean = false;
-  isSeller:Boolean=false;
-  private SELLER="admin@ilink.com";
+  isSeller: boolean = false;
+  private SELLER = "admin@ilink.com";
 
   login(form: LoginForm) {
     if (this.isLoading) return;
@@ -31,17 +35,16 @@ export class AuthService {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, form.email, form.password)
       .then((userCredential) => {
-
         const user = userCredential.user;
         console.log(userCredential);
         this.isAuthenticated = true;
-
-        if(form.email===this.SELLER){
-          this.isSeller=true;
+        this.setSessionToken(true);
+        if (form.email === this.SELLER) {
+          this.isSeller = true;
           this.router.navigate(['/seller']);
+        } else {
+          this.router.navigate(['']);
         }
-        this.router.navigate(['']);
-
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -58,7 +61,6 @@ export class AuthService {
     createUserWithEmailAndPassword(auth, form.email, form.password)
       .then((userCredential) => {
         const user = userCredential.user;
-
         console.log(userCredential);
         this.router.navigate(['/login']);
       })
@@ -69,16 +71,26 @@ export class AuthService {
       .finally(() => (this.isLoading = false));
   }
 
+  setSessionToken(isAuthenticated: boolean) {
+    sessionStorage.setItem('Authenticated', isAuthenticated ? 'true' : 'false');
+  }
+
+  setUserToken(user:any){
+    sessionStorage.setItem('User',JSON.parse(user));
+  }
   logout() {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
         console.log('Signed out');
         this.isAuthenticated = false;
-        this.isSeller=false;
-        sessionStorage.removeItem('cart');
+        this.isSeller = false;
+        this.setSessionToken(false);
+        this.cartService.clear();
+        sessionStorage.clear();
         this.router.navigate(['login']);
         this.logoutEvent.next();
+
       })
       .catch((error) => {
         console.log(error.message);
@@ -95,8 +107,9 @@ export class AuthService {
         if (credential) {
           const token = credential.accessToken;
           const user = result.user;
-          console.log(token,user);
+          console.log(token, user);
           this.isAuthenticated = true;
+          this.setSessionToken(true);
           this.router.navigate(['']);
         } else {
           console.error('Credential is null');
@@ -110,11 +123,11 @@ export class AuthService {
       });
   }
 
-  redirectLogin(){
+  redirectLogin() {
     this.router.navigate(['/login']);
   }
 
-  redirectRegister(){
+  redirectRegister() {
     this.router.navigate(['/register']);
   }
 }

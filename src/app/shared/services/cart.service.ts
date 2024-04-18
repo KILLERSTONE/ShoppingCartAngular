@@ -53,6 +53,11 @@ export class CartService {
     return this.cart;
   }
 
+  clear(){
+    this.cart=[];
+    sessionStorage.removeItem('cart');
+  }
+
   getBookQuantity(book: Book): number {
     const item = this.cart.find(item => item.book.id === book.id);
     return item ? item.quantity : 0;
